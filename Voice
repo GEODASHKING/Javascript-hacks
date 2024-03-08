@@ -1,0 +1,90 @@
+class VoiceRecorder {
+    /**
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  console.log("getUserMedia supported.");
+  navigator.mediaDevices
+    .getUserMedia(
+      // constraints - only audio needed for this app
+      {
+        audio: true,
+      },
+    )
+
+    // Success callback
+    .then((stream) => {})
+
+    // Error callback
+    .catch((err) => {
+      console.error(`The following getUserMedia error occurred: ${err}`);
+    });
+} else {
+  console.log("getUserMedia not supported on your browser!");
+}
+
+     */
+    constructor() {
+        this.recordings = [];
+        this.isRecording = false;
+    }
+
+    /**
+     * Start recording audio.
+     */
+    startRecording() {
+        if (this.isRecording) {
+            console.log("Already recording.");
+        } else {
+            this.isRecording = true;
+            console.log("Recording started...");
+        }
+    }
+
+    /**
+     * Stop recording audio.
+     */
+    stopRecording() {
+        if (!this.isRecording) {
+            console.log("Not currently recording.");
+        } else {
+            this.isRecording = false;
+            console.log("Recording stopped.");
+        }
+    }
+
+    /**
+     * Save the recorded audio.
+     *
+     * @param {string} audioClip - The audio clip to be saved.
+     */
+    saveRecording(audioClip) {
+        if (this.isRecording) {
+            this.recordings.push(audioClip);
+            console.log("Recording saved successfully.");
+        } else {
+            console.log("No recording to save. Start recording first.");
+        }
+    }
+
+    /**
+     * Play the last recorded audio.
+     */
+    playLastRecording() {
+        if (this.recordings.length === 0) {
+            console.log("No recordings available.");
+        } else {
+            console.log("Playing last recording: " + this.recordings[this.recordings.length - 1]);
+        }
+    }
+}
+
+// Usage Example for VoiceRecorder
+
+const recorder = new VoiceRecorder();
+
+recorder.startRecording();
+recorder.saveRecording("Audio Clip 1");
+recorder.stopRecording();
+recorder.startRecording();
+recorder.saveRecording("Audio Clip 2");
+recorder.stopRecording();
+recorder.playLastRecording();
